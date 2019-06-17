@@ -15,5 +15,6 @@ trigger:
 jobs:
 - job: Job1
   steps:
+  - download: foobar
   - powershell: |
       ls $(Pipeline.Workspace)/
