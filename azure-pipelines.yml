@@ -19,6 +19,10 @@ stages:
     steps:
     - download: foobar
       artifact: A1
+    - task: PublishPipelineArtifact@0
+      inputs:
+        artifactName: 'A3'
+        targetPath: 'readme.md'
     - powershell: |
         ls $(Pipeline.Workspace)/
 
