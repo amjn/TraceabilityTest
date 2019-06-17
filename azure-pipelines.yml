@@ -12,9 +12,23 @@ resources:
 trigger:
 - master
 
-jobs:
-- job: Job1
-  steps:
-  - download: foobar
-  - powershell: |
-      ls $(Pipeline.Workspace)/
+stages:
+- stage: Build
+  jobs:
+  - job: Job1
+    steps:
+    - download: foobar
+    - powershell: |
+        ls $(Pipeline.Workspace)/
+
+- stage: deployment
+  jobs:
+    - deployment: Deploy1
+      pool: hosted
+      environment: Env01
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - powershell: |
+                ls $(Pipeline.workspace)/
