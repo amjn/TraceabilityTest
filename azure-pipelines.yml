@@ -41,7 +41,6 @@ stages:
         runOnce:
           deploy:
             steps:
-            - download: foobar
-              artifact: A2
+            - download: none
             - powershell: |
                 ls $(Pipeline.workspace)/
