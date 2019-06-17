@@ -18,6 +18,7 @@ stages:
   - job: Job1
     steps:
     - download: foobar
+      artifact: A1
     - powershell: |
         ls $(Pipeline.Workspace)/
 
@@ -30,5 +31,17 @@ stages:
         runOnce:
           deploy:
             steps:
+            - powershell: |
+                ls $(Pipeline.workspace)/
+    
+    - deployment: Deploy2
+      pool: hosted
+      environment: Env01
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - download: foobar
+              artifact: A2
             - powershell: |
                 ls $(Pipeline.workspace)/
